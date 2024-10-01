@@ -1,4 +1,4 @@
-import { Ticket } from '@prisma/client';
+import { Ticket } from "@prisma/client";
 import {
   Table,
   TableBody,
@@ -6,9 +6,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import TicketStatusBadge from '@/components/TicketStatusBadge';
-import TicketPriority from '@/components/TicketPriority';
+} from "@/components/ui/table";
+import TicketStatusBadge from "@/components/TicketStatusBadge";
+import TicketPriority from "@/components/TicketPriority";
+import Link from "next/link";
 
 interface Props {
   tickets: Ticket[];
@@ -30,7 +31,9 @@ const DataTable = ({ tickets }: Props) => {
             {tickets
               ? tickets.map((ticket) => (
                   <TableRow key={ticket.id} data-href="/">
-                    <TableCell>{ticket.title}</TableCell>
+                    <TableCell>
+                      <Link href={`/tickets/${ticket.id}`}>{ticket.title}</Link>
+                    </TableCell>
                     <TableCell>
                       <TicketStatusBadge status={ticket.status} />
                     </TableCell>
@@ -38,12 +41,12 @@ const DataTable = ({ tickets }: Props) => {
                       <TicketPriority priority={ticket.priority} />
                     </TableCell>
                     <TableCell>
-                      {ticket.createdAt.toLocaleDateString('en-US', {
-                        year: '2-digit',
-                        month: '2-digit',
-                        day: '2-digit',
-                        hour: 'numeric',
-                        minute: '2-digit',
+                      {ticket.createdAt.toLocaleDateString("en-US", {
+                        year: "2-digit",
+                        month: "2-digit",
+                        day: "2-digit",
+                        hour: "numeric",
+                        minute: "2-digit",
                         hour12: true,
                       })}
                     </TableCell>
