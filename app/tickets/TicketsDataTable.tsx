@@ -18,7 +18,7 @@ interface Props {
   searchParams: SearchParams;
 }
 
-const DataTable = ({ tickets, searchParams }: Props) => {
+const TicketsDataTable = ({ tickets, searchParams }: Props) => {
   return (
     <div className="mt-5 w-full">
       <div className="rounded-md sm:border">
@@ -96,4 +96,4 @@ const DataTable = ({ tickets, searchParams }: Props) => {
   );
 };
 
-export default DataTable;
+export default TicketsDataTable;
