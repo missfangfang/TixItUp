@@ -10,21 +10,57 @@ import {
 import TicketStatusBadge from "@/components/TicketStatusBadge";
 import TicketPriority from "@/components/TicketPriority";
 import Link from "next/link";
+import { ArrowDown } from "lucide-react";
+import { SearchParams } from "@/app/tickets/page";
 
 interface Props {
   tickets: Ticket[];
+  searchParams: SearchParams;
 }
-const DataTable = ({ tickets }: Props) => {
+
+const DataTable = ({ tickets, searchParams }: Props) => {
   return (
     <div className="mt-5 w-full">
       <div className="rounded-md sm:border">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Title</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Priority</TableHead>
-              <TableHead>Created At</TableHead>
+              <TableHead>
+                <Link href={{ query: { ...searchParams, orderBy: "title" } }}>
+                  Title
+                </Link>
+                {"title" === searchParams.orderBy && (
+                  <ArrowDown className="inline p-1" />
+                )}
+              </TableHead>
+              <TableHead>
+                <Link href={{ query: { ...searchParams, orderBy: "status" } }}>
+                  Status
+                </Link>
+                {"status" === searchParams.orderBy && (
+                  <ArrowDown className="inline p-1" />
+                )}
+              </TableHead>
+              <TableHead>
+                <Link
+                  href={{ query: { ...searchParams, orderBy: "priority" } }}
+                >
+                  Priority
+                </Link>
+                {"priority" === searchParams.orderBy && (
+                  <ArrowDown className="inline p-1" />
+                )}
+              </TableHead>
+              <TableHead>
+                <Link
+                  href={{ query: { ...searchParams, orderBy: "createdAt" } }}
+                >
+                  Created At
+                </Link>
+                {"createdAt" === searchParams.orderBy && (
+                  <ArrowDown className="inline p-1" />
+                )}
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
