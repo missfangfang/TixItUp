@@ -14,16 +14,13 @@ const options: NextAuthOptions = {
           type: "text",
           placeholder: "Username...",
         },
-        password: {
-          label: "Password",
-          type: "password",
-          placeholder: "Password",
-        },
+        password: { label: "Password", type: "password" },
       },
       authorize: async (credentials) => {
         const user = await prisma.user.findUnique({
           where: { username: credentials!.username },
         });
+
         if (!user) {
           return null;
         }
@@ -32,7 +29,8 @@ const options: NextAuthOptions = {
           credentials!.password,
           user.password
         );
-        if (!match) {
+
+        if (match) {
           return user;
         }
 
